@@ -3,6 +3,10 @@ with open("input.txt", "r") as f:
 
 moves = [move.split(' ') for move in data.split('\n')]
 
+# A,X - ROCK LOSE
+# B,Y - PAPER DRAW
+# C,Z - SCISSORS WIN
+
 RPS_MAP = {
   'Z' : 'B',
   'X' : 'C',
@@ -23,19 +27,6 @@ RPS_MAP_BACKWARDS = {
   'C': 'X',
   'A': 'Y'
 }
-
-def Get_Move (outcome, their_move):
-  # Draw
-  if(outcome == 'Y'):
-    return DRAW_MAP[their_move]
-  elif(outcome == 'X'):
-    return RPS_MAP[their_move]
-  elif(outcome == 'Z'):
-    return RPS_MAP_BACKWARDS[their_move]
-
-# A,X - ROCK LOSE
-# B,Y - PAPER DRAW
-# C,Z - SCISSORS WIN
 
 RPC_SCORE_MAP = {
   'X': 1,
@@ -60,6 +51,15 @@ def Determine_Round(my_move, their_move):
   else:
     # Draw
     return RPC_SCORE_MAP[my_move] + SCORE_MULTIPLIER['draw']
+
+def Get_Move (outcome, their_move):
+  # Draw
+  if(outcome == 'Y'):
+    return DRAW_MAP[their_move]
+  elif(outcome == 'X'):
+    return RPS_MAP[their_move]
+  elif(outcome == 'Z'):
+    return RPS_MAP_BACKWARDS[their_move]
 
 # Part 1
 round_1_results = [Determine_Round(result[1], result[0]) for result in moves]
