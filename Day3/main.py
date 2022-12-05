@@ -2,8 +2,8 @@ with open("input.txt", "r") as f:
  data = f.read()
 
 ranking = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-def GetIntersection (sack: str, divisions: int):
-  comp_length = int(len(sack) / divisions)
+def GetIntersection (sack: str):
+  comp_length = int(len(sack) / 2)
   most_char_comp_1 = sack[0:comp_length]
   most_char_comp_2 = sack[comp_length:]
 
@@ -18,7 +18,7 @@ def GetRank(letter):
     return 0
 
 def PartOne():
-  rucksacks = [GetIntersection(sack, 2) for sack in data.split('\n')]
+  rucksacks = [GetIntersection(sack) for sack in data.split('\n')]
   ruck_ranks = [GetRank(ruck) for ruck in rucksacks]
   print('Part 1:', sum(ruck_ranks))
 
