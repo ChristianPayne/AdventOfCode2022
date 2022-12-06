@@ -3,7 +3,7 @@ with open("input.txt", "r") as f:
 
 def Check_For_Unique_Strings (length_of_string):
   for i, _ in enumerate(data):
-    if(i < 4):
+    if(i < length_of_string):
       continue
     check_indices = [i - step for step in range(length_of_string)]
     check_indices.reverse()
