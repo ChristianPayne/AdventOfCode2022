@@ -42,10 +42,36 @@ function moveManyCrates(numOfCratesToMove, startingStackNumber, endingStackNumbe
   }
 }
 
-procedure.forEach(operation => {
-  moveManyCrates(operation[0], operation[1] - 1, operation[2] - 1)
-})
+function moveMoreThanOneCrate(numberOfCrates, startingStackNumber, endingStackNumber) {
+  let heldCrates = []
+  for (let i = 0; i < numberOfCrates; i++) {
+    let crateToBeMoved = stacks[startingStackNumber].pop()
+    heldCrates.push(crateToBeMoved)
+  }
+  heldCrates.reverse()
+  stacks[endingStackNumber] = [...stacks[endingStackNumber], ...heldCrates]
+}
 
-console.log('Final stack arrangement');
-console.table(stacks)
-console.log('Crates on top', stacks.map(stack => stack[stack.length - 1]).join(''));
+
+function Part1() {
+  procedure.forEach(operation => {
+    moveManyCrates(operation[0], operation[1] - 1, operation[2] - 1)
+  })
+
+  console.log('Part 1: Final stack arrangement');
+  console.table(stacks)
+  console.log('Crates on top', stacks.map(stack => stack[stack.length - 1]).join(''));
+}
+
+function Part2() {
+  procedure.forEach(operation => {
+    moveMoreThanOneCrate(operation[0], operation[1] - 1, operation[2] - 1)
+  })
+  console.log('Part 2: Final stack arrangement');
+  console.table(stacks)
+  console.log('Crates on top', stacks.map(stack => stack[stack.length - 1]).join(''));
+}
+
+// Because of scoping bugs, only one can be run at a time.
+// Part1()
+Part2()
